@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <SearchView
+        android:id="@+id/restSearchesView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:closeIcon="@drawable/ic_baseline_clear_24"
+        android:goIcon="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:queryHint="식당을 검색하세요."
+        android:iconifiedByDefault="false"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/gpsCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="현재 위치 기반으로 검색"
+            android:layout_weight="4"/>
+        <Spinner
+            android:id="@+id/sortSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"/>
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/gpsAddressText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="사 먹기"/>
+        android:text="현재 위치 주소"
+        android:layout_marginLeft="8dp"/>
+    <ListView
+        android:id="@+id/restListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -4,34 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:closeIcon="@drawable/ic_baseline_clear_24"
+        android:goIcon="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:queryHint="음식 이름을 검색하세요."
+        android:iconifiedByDefault="false"/>
+
+    <TextView
+        android:id="@+id/textInfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:text="음식을 검색해 주세요!"
+        android:textSize="20sp"
+        android:gravity="center"/>
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:closeIcon="@drawable/ic_baseline_clear_24"
-            android:goIcon="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:queryHint="음식 이름을 검색하세요."
-            android:iconifiedByDefault="false"/>
-
-        <TextView
-            android:id="@+id/textInfo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="음식을 검색해 주세요!"
-            android:textSize="20sp"
-            android:gravity="center"/>
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-
-    </LinearLayout>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
