@@ -32,6 +32,14 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="식당을 검색해 주세요!"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
     <ListView
         android:id="@+id/restListView"
         android:layout_width="match_parent"

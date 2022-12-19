@@ -8,15 +8,12 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,18 +40,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class RestaurantActivity extends AppCompatActivity {
+    private static final double easternmost = 131.87222222; // 대한민국 극동
+    private static final double westernmost = 125.06666667; // 극서
+    private static final double northernmost = 38.45000000; // 극북
+    private static final double southernmost = 33.10000000; // 극남
+
     String[] sortItems = {"정확도순", "거리순"};
     SearchView restSearchView;
     ListView restListView;
     JSONArray array;
     JSONArray addArray;
-    // 임시 고정 gps좌표
-//    String lat = "35.178215357025955";
-//    String lon = "126.90922309044905";
     // 위도, 경도
     String lat = "";
     String lon = "";
@@ -69,30 +66,35 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
+        // 초기 좌표 - 전남대 공과대학 7호관
         lat = "35.178215357025955";
         lon = "126.90922309044905";
+        setApiURL();
 
         // GPS 및 위치 관련
         final ProgressDialog dialog = new ProgressDialog(RestaurantActivity.this); // 진행 다이얼로그 생성
         dialog.setMessage("위치 검색 중...");
         dialog.show();
+        Log.d("build MODEL", android.os.Build.MODEL);
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(@NonNull Location location) { // gps 좌표가 업데이트 됐을 때 위도, 경도 변수 업데이트
-                lat = Double.toString(location.getLatitude());
-                lon = Double.toString(location.getLongitude());
-                Log.d("gps", "lat: "+lat);
-                Log.d("gps", "lon: "+lon);
-                kakaoAPI = "https://dapi.kakao.com/v2/local/search/keyword.json?y=" + lat + "&x=" + lon + "&query=";
-                gpsKakaoAPI = "https://dapi.kakao.com/v2/local/search/keyword.json?y=" + lat + "&x=" + lon + "&radius=20000&sort=distance&query=";
-                url = kakaoAPI;
-                Log.d("uuu", "kakaoAPI"+kakaoAPI);
-                Log.d("uuu", "gpsKakaoAPI"+gpsKakaoAPI);
-                sendAddressRequest();
-                dialog.dismiss();
-                if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {locationManager.removeUpdates(locationListener); }
+                if (westernmost<location.getLongitude() && location.getLongitude()<easternmost &&
+                        southernmost<location.getLatitude() && location.getLatitude()<northernmost) { // 대한민국 안의 좌표 일때만
+                    lat = Double.toString(location.getLatitude());
+                    lon = Double.toString(location.getLongitude());
+                    Log.d("gps", "lat: "+lat);
+                    Log.d("gps", "lon: "+lon);
+                    setApiURL();
+                    url = kakaoAPI;
+                    Log.d("uuu", "kakaoAPI"+kakaoAPI);
+                    Log.d("uuu", "gpsKakaoAPI"+gpsKakaoAPI);
+                    sendAddressRequest();
+                    dialog.dismiss();
+                    if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {locationManager.removeUpdates(locationListener); }
+                }
             }
         };
 
@@ -113,6 +115,8 @@ public class RestaurantActivity extends AppCompatActivity {
         restSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) { // 검색 버튼을 눌렀을 경우
+                TextView textInfo = findViewById(R.id.textInfo);
+                textInfo.setVisibility(View.GONE); // 안내 문구 완전히 숨기기
                 restSearchView.clearFocus();
                 sendRestRequest(query);
                 return true;
@@ -179,6 +183,11 @@ public class RestaurantActivity extends AppCompatActivity {
         });
     }
 
+    public void setApiURL() { // API URL 세팅
+        kakaoAPI = "https://dapi.kakao.com/v2/local/search/keyword.json?y=" + lat + "&x=" + lon + "&query=";
+        gpsKakaoAPI = "https://dapi.kakao.com/v2/local/search/keyword.json?y=" + lat + "&x=" + lon + "&radius=20000&sort=distance&query=";
+    }
+
     public void sendRestRequest(CharSequence query) { // 식당 요청 메소드
 
         String reqUrl = url + query;
@@ -196,7 +205,6 @@ public class RestaurantActivity extends AppCompatActivity {
                 dialog.dismiss(); // 다이얼로그 끝냄
                 try {
                     JSONObject res = new JSONObject(response); // response를 JSONObject로 생성
-//                    JSONObject cookRcp = res.getJSONObject("COOKRCP01");
                     array = res.getJSONArray("documents"); // 식당들을 JSONArray에 저장
                     items.clear();
                     for(int i=0; i<array.length();i++){ // 검색 결과 식당들이 들어있는 array에서 데이터를 하나씩 꺼내 리스트뷰 아이템에 적용
