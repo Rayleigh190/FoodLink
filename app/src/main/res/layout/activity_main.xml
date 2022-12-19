@@ -3,46 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:weightSum="5">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/food_logo1"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="0dp"
+        android:src="@drawable/food_logo3"
+        android:layout_weight="2.5"
+        android:padding="45dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:text="어떻게 먹겠습니까?"
         android:textSize="30sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="80dp">
+        android:layout_weight="1.5"
+        android:weightSum="2">
 
             <Button
                 android:id="@+id/btn_cook"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:text="해 먹기"
-                android:layout_marginRight="10dp"
                 android:textSize="20sp"
-                android:backgroundTint="#FF7E36"/>
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_style"/>
             <Button
                 android:id="@+id/btn_restaurant"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:text="사 먹기"
                 android:textSize="20sp"
-                android:backgroundTint="#FF7E36"/>
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_style"/>
 
     </LinearLayout>
 
