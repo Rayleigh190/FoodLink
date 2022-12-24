@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-
+    <!-- activity_cook의 ListView에 들어갈 item 레이아웃 -->
+    <!-- 메뉴 사진, 이름, 종류를 출력 -->
     <ImageView
         android:id="@+id/recipe_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/food_logo1"
+        android:src="@drawable/ic_baseline_collections_24"
         android:layout_margin="20dp"/>
 
     <LinearLayout
@@ -31,9 +32,6 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:text="요리 종류"/>
-
     </LinearLayout>
-
-
 
 </LinearLayout>

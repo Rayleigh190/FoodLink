@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#FFFFFF"
     android:weightSum="5">
-
+    <!-- 앱 로고, "해 먹기"와 "사 먹기" 두 가지 버튼 -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -50,6 +50,5 @@
                 android:background="@drawable/rectangle_style"/>
 
     </LinearLayout>
-
 
 </LinearLayout>

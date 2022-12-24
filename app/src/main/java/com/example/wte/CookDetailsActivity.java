@@ -54,6 +54,7 @@ public class CookDetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // 레시피 메뉴얼 텍스트와 이미지를 세팅
         for(int i=1; i<21; i++){
             try {
                 if (i<10){ // MANUAL01 ~ MANUAL09, MANUAL_IMG01 ~ MANUAL_IMG09 데이터 세팅
@@ -63,7 +64,7 @@ public class CookDetailsActivity extends AppCompatActivity {
                         manualTextArray[i-1].setVisibility(View.GONE);
                     }
                     if (object.get("MANUAL_IMG0" + i).toString().length() > 1) { // 데이터가 있을 경우 세팅
-                        Glide.with(CookDetailsActivity.this).load(object.get("MANUAL_IMG0" + i)).placeholder(R.drawable.ic_baseline_collections_24).error(R.drawable.food_logo1).into(manualImgArray[i-1]); // Glide로 이미지 표시하기
+                        Glide.with(CookDetailsActivity.this).load(object.get("MANUAL_IMG0" + i)).placeholder(R.drawable.ic_baseline_collections_24).error(R.drawable.food_logo3).into(manualImgArray[i-1]); // Glide로 이미지 표시하기
                     } else { // 데이터가 없을 경우 뷰를 숨김
                         manualImgArray[i-1].setVisibility(View.GONE);
                     }
@@ -75,7 +76,7 @@ public class CookDetailsActivity extends AppCompatActivity {
                         manualTextArray[i-1].setVisibility(View.GONE);
                     }
                     if (object.get("MANUAL_IMG" + i).toString().length() > 1) { // 데이터가 있을 경우 세팅
-                        Glide.with(CookDetailsActivity.this).load(object.get("MANUAL_IMG" + i)).placeholder(R.drawable.ic_baseline_collections_24).error(R.drawable.food_logo1).into(manualImgArray[i-1]); // Glide로 이미지 표시하기
+                        Glide.with(CookDetailsActivity.this).load(object.get("MANUAL_IMG" + i)).placeholder(R.drawable.ic_baseline_collections_24).error(R.drawable.food_logo3).into(manualImgArray[i-1]); // Glide로 이미지 표시하기
                     } else { // 데이터가 없을 경우 뷰를 숨김
                         manualImgArray[i-1].setVisibility(View.GONE);
                     }

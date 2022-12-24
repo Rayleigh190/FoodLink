@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <!-- 레시피 정보와 메뉴얼들을 출력 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <!-- 식당 상세 정보를 보여 줄 웹뷰 -->
     <WebView
         android:id="@+id/restWebView"
         android:layout_width="match_parent"

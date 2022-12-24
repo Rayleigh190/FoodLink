@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp">
-
+    <!-- activity_restaurant의 ListView에 들어갈 item 레이아웃 -->
+    <!-- 식당 이름, 종류, 번호, 주소, 거리를 출력 -->
     <TextView
         android:id="@+id/restNameText"
         android:layout_width="match_parent"
