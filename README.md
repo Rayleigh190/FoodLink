@@ -1,3 +1,5 @@
+![Foodlink thumbnail image](https://user-images.githubusercontent.com/86937253/213867847-1bbb9547-44f6-4f31-808e-8b4bcd7db8f1.png)
+
 # 2022 - FoodLink Project
 
 2022년 2학기 모바일응용소프트웨어 과목의 기말 프로젝트입니다.
